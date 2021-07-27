@@ -29,7 +29,7 @@ passport.use(new LocalStrategy({
 
 ));
 
-
+//once the user is found and authenticate we serialize the user
 // serializing the user to decide which key is to be kept in the cookies
 passport.serializeUser(function(user, done){
     done(null, user.id);
@@ -48,6 +48,7 @@ passport.deserializeUser(function(id, done){
         return done(null, user);
     });
 });
+//using this function as middleware
 passport.checkAuthenticate=function(req,res,next){
     if(req.isAuthenticated()){
         return next();

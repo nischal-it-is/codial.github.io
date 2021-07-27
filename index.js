@@ -18,13 +18,13 @@ app.use(sassMiddleware({
     prefix: '/css'
 }));//sass middleware
 
-app.use(express.urlencoded());
+app.use(express.urlencoded());//middleware for static files use
 
-app.use(cookieParser());
+app.use(cookieParser());//middleware to parse the cookie
 
-app.use(express.static('./assets'));
+app.use(express.static('./assets'));//middleware telling where to find aassets i.e. static files
 
-app.use(expressLayouts);
+app.use(expressLayouts);//middleware to tell use layouts
 // extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
@@ -36,7 +36,7 @@ app.set('layout extractScripts', true);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-
+//middleware to use passport by sessions
 app.use(session({
     name: 'codeial',
     // TODO change the secret before deployment in production mode

@@ -9,11 +9,11 @@ const userController=require('../controllers/user_controller');
 router.get('/profile',passport.checkAuthenticate,userController.profile);
 router.get('/sign-up', userController.signUp);
 router.get('/sign-in', userController.signIn);
-router.post('/create',userController.create);
+router.post('/create',userController.create);//this /create etc. are matched from views
 router.post('/create-session', passport.authenticate(
     'local',
-    {failureRedirect: '/user/sign-in'},
-), userController.createSession);
+    {failureRedirect: '/user/sign-in'},//if fails to authenticate
+), userController.createSession);//flow is if done then usercontroller.createsession otherwise failureRedirect
 router.get('/sign-out',userController.destroySession);
 
 module.exports=router;
