@@ -10,7 +10,7 @@ console.log('router loaded');
 router.get('/', homeController.home);
 router.use('/user', require('./user'));
 router.use('/post', require('./post'));
-
+router.use('/comment',require('./comment'));
 
 
 // for anty further routes, access from here

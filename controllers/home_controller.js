@@ -7,7 +7,14 @@ module.exports.home=function(req,res){
         //         post:post
         //     })
         // })
-        Post.find({}).populate('user').exec(function(err, post){
+        Post.find({})
+        .populate('user')
+        .populate({
+            path: 'comment',
+            populate: {
+                path: 'user'
+            }
+        }).exec(function(err, post){
             return res.render('home', {
                 title: "Codeial | Home",
                 post:post
