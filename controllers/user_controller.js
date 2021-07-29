@@ -2,10 +2,28 @@ const User = require('../models/user');//importing user model
 
 
 module.exports.profile = function(req, res){
-    return res.render('user_profile', {
-        title: 'User Profile'
-    })
+    User.findById(req.params.id, function(err, user){
+        return res.render('user_profile', {
+            title: 'User Profile',
+            profile_user: user
+        });
+    });
+
 }
+module.exports.update=function(req,res){
+    if(req.user.id==req.params.id)
+    {
+        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            return res.redirect('back');
+        })
+    }
+    else
+    {
+        return res.status(401).send('Unauthorized');
+    }
+}
+
+
 /*manual authentication to render profile when signed in is matched
   module.exports.profile=function(req.res){
       if(req.cookies.user_id)
@@ -70,6 +88,7 @@ module.exports.create = function(req, res){
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
     // TODO later
+    req.flash('success',"Logged In succesfully");
     return res.redirect('/');
 }
 /*manual authentication signin creation
@@ -95,6 +114,7 @@ module.exports.createSession = function(req, res){
 */
 module.exports.destroySession=function(req,res){
     req.logout();
+    req.flash('success',"You have succesfully logged out");
     return res.redirect('/');
     
 }

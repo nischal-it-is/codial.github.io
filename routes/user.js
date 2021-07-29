@@ -6,7 +6,8 @@ const passport=require('passport');
 const userController=require('../controllers/user_controller');
 
 //router.get('/',homeController.home);
-router.get('/profile',passport.checkAuthenticate,userController.profile);
+router.get('/profile/:id',passport.checkAuthenticate,userController.profile);
+router.post('/update/:id',passport.checkAuthenticate,userController.update);
 router.get('/sign-up', userController.signUp);
 router.get('/sign-in', userController.signIn);
 router.post('/create',userController.create);//this /create etc. are matched from views
