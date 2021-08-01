@@ -8,6 +8,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWT = require('./config/passport-jwt-strategy');
 const flash=require('connect-flash');
 const customMware=require('./config/middleware');
 const MongoStore=require('connect-mongo');
@@ -25,7 +26,7 @@ app.use(express.urlencoded());//middleware for static files use
 app.use(cookieParser());//middleware to parse the cookie
 
 app.use(express.static('./assets'));//middleware telling where to find aassets i.e. static files
-
+app.use('/uploads',express.static(__dirname+'/uploads'));
 app.use(expressLayouts);//middleware to tell use layouts
 // extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
